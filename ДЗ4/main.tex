@@ -1,0 +1,235 @@
+\documentclass[a4paper]{article}
+\usepackage{setspace}
+\usepackage[T2A]{fontenc} %
+\usepackage[utf8]{inputenc} % подключение русского языка
+\usepackage[russian]{babel} %
+\usepackage[12pt]{extsizes}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}
+\setstretch{1.3}
+
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\renewcommand{\det}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+\renewcommand{\f}[2]{\frac{#1}{#2}}
+\newcommand{\dspace}{\space\space}
+\newcommand{\s}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\mul}[2]{\prod_{#1}^{#2}}
+\newcommand{\sq}[1]{\left[ {#1} \right]}
+\newcommand{\gath}[1]{\left[ \begin{array}{@{}l@{}} #1 \end{array} \right.}
+\newcommand{\case}[1]{\begin{cases} #1 \end{cases}}
+\newcommand{\ts}{\text{\space}}
+\newcommand{\lm}[1]{\underset{#1}{\lim}}
+\newcommand{\suplm}[1]{\underset{#1}{\overline{\lim}}}
+\newcommand{\inflm}[1]{\underset{#1}{\underline{\lim}}}
+
+\renewcommand{\phi}{\varphi}
+\newcommand{\lr}{\Leftrightarrow}
+\renewcommand{\r}{\Rightarrow}
+\newcommand{\rr}{\rightarrow}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\OO}{\underline{O}}
+\newcommand{\oo}{\overline{o}}
+\newcommand{\divides}{\;|\;}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} %
+\makeatletter                               % \abs{}
+\let\oldabs\abs                             %
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}       %
+
+\begin{document}
+
+\section*{Домашнее задание на 07.02 (Теория чисел)}
+ {\large Емельянов Владимир, ПМИ гр №247}\\\\
+\begin{enumerate}
+    \item[\textbf{№1}]Доказательство:
+    \begin{enumerate}
+        \item[$\r$] Пусть $p$ - простое, тогда по т.Вильсона:
+        $$(p-1)! \equiv -1 \pmod{p}$$
+        Но мы знаем, что:
+        $$p-1 \equiv -1 \pmod{p}$$
+        А значит:
+        $$(p-2)! \equiv 1 \pmod{p}$$
+
+        \item[$\Leftarrow$] Пусть:
+        $$(p-2)! \equiv 1 \pmod{p}$$
+        докажем, что $p$ - простое.
+
+        Пусть $p$ - непростое, тогда существуют такие $a$ и $b$, что:
+        $$p = ab$$
+        А значит:
+        $$(p-2)! =(p-2)(p-3)\dots a \dots b \dots 2\cdot 1$$
+        Поэтому:
+        $$p=ab \divides (p-2)!$$
+        Следовательно:
+        $$(p-2)! \equiv 0 \pmod{p}$$
+        Но по условию:
+        $$(p-2)! \equiv 1 \pmod{p}$$
+        Противоречие, значит $p$ - простое.
+    \end{enumerate}
+
+    \item[\textbf{№2}]Чтобы решить систему
+    $$\case{
+        x \equiv 4 \pmod{15}\\
+        x \equiv -1 \pmod{16}\\
+        x \equiv 11 \pmod{17}
+    }$$
+    воспользуемся к.т.о. . Единственное решение:
+    $$x = \s{i=1}{k}M_i b_i \pmod{M}$$
+    Где:
+    $$M_i b_i = a_i \pmod{m_i}$$
+    $$M_1 = 16\cdot 17 = 272 \equiv 2 \pmod{15}$$
+    $$M_2 = 15\cdot 17 = 255 \equiv -1 \pmod{16}$$
+    $$M_3 = 15\cdot 16 = 240 \equiv 2 \pmod{17}$$
+    $$M_1b_1 \equiv a_1 \pmod{m_1} \lr 2 b_1 \equiv 4 \pmod{15} \r b_1 = 2$$
+    $$M_2b_2 \equiv a_2 \pmod{m_2} \lr -b_2 \equiv -1 \pmod{16} \r b_2 = 1$$
+    $$M_3b_3 \equiv a_3 \pmod{m_3} \lr 2b_3 \equiv 11 \equiv -6 \pmod{17} \r b_3 = -3$$
+    Найдём решение:
+    $$M = 15\cdot 16 \cdot 17 = 4080$$
+    $$x = 272\cdot 2 +255 \cdot 1+240\cdot (-3) = 79 \pmod{4080}$$
+    \textbf{Ответ: } $79 \pmod{4080}$\\
+
+    \item[\textbf{№3}]\begin{enumerate}
+        \item[a)]$x^2-1 \equiv 0 \pmod{15}$
+        Получаем:
+        $$(x-1)(x+1)\equiv 0 \pmod{15}$$
+        Разберём все возможные случаи:
+        $$\gath{
+            \case{
+                x-1 \equiv 0 \pmod{3}\\
+                x+1 \equiv 0 \pmod{5}\\
+            } \implies x = -11 \pmod{30}\\
+            \case{
+                x-1 \equiv 0 \pmod{5}\\
+                x+1 \equiv 0 \pmod{3}\\
+            } \implies x = 11 \pmod{30}\\
+            x-1 \equiv 0 \pmod{15} \implies x = 1 \pmod{15}\\
+            x+1 \equiv 0 \pmod{15} \implies x = -1 \pmod{15}
+        }$$
+        \textbf{Ответ: }$\gath{
+            x = 1 \pmod{15} \\
+            x = -1 \pmod{15} \\
+            x = -11 \pmod{30}\\
+            x = 11 \pmod{30}
+         }$ 
+
+        \item[б)]$x^2-1 \equiv 0 \pmod{56}$
+        $$56 = 8\cdot 7$$
+        Получаем:
+        $$(x-1)(x+1)\equiv 0 \pmod{56}$$
+        Так $x-1$ и $x+1$ одновременно либо чётные, либо нечётные, то для искомого сравнения возможны только случаи:
+        $$
+        \case{
+            7\cdot 2 \divides x-1\\
+            2^2 \divides x+1
+        }\\
+        \case{
+            7\cdot 2^2 \divides x-1\\
+            2 \divides x+1
+        }
+        \case{
+            7\cdot 2 \divides x+1\\
+            2^2 \divides x-1
+        }\\
+        \case{
+            7\cdot 2^2 \divides x+1\\
+            2 \divides x-1
+        }
+        $$
+        Или когда:
+        $$56 \divides x-1 \text{ или } 56 \divides x+1$$\\
+    \end{enumerate}
+
+    \item[\textbf{№4}]$\varphi(4^x6^y) = 2\varphi(35^z)$
+    Это эквивалентно:
+    $$2^{2x+y}3^y(1-\f{1}{2})(1-\f{1}{3}) = 2\cdot 35^z (1 - \f{1}{5})(1-\f{1}{7})$$
+    $$2^{2x+y}3^y\f{1}{2}\f{2}{3} = 2\cdot 35^z \f{4}{5}\f{6}{7}$$
+    $$2^{2x+y}3^{y-1} =  48 \cdot 35^{z-1} = 2^{4}\cdot 3 \cdot 5^{z-1}\cdot 7^{z-1}$$
+    Следовательно:
+    $$\case{
+        2x+y = 4\\
+        y-1 = 1\\
+        z = 1
+    } \implies \case{
+        x = 1\\
+        y = 2\\
+        z = 1
+    } $$
+
+    \textbf{Ответ: }$(x, y, z) = (1, 2, 1)$\\
+
+    \item[\textbf{№5}]Чтобы доказать, что отображение 
+    $$
+    \operatorname{Enc}_{e}(\bar{a})=\overline{a^{e}}
+    $$
+    взаимно однозначно отображает $\mathbb{Z}_{n}^{*}$ на себя, нам нужно показать, что оно является биекцией, то есть, что оно инъективно и сюръективно.
+    
+    Для инъективности нам нужно показать, что если 
+    $$
+    \operatorname{Enc}_{e}(\bar{a_1}) = \operatorname{Enc}_{e}(\bar{a_2}),
+    $$
+    то $\bar{a_1} = \bar{a_2}$.
+
+    Предположим, что 
+    $$
+    \overline{a_1^e} = \overline{a_2^e}.
+    $$
+    Это означает, что 
+    $$
+    a_1^e \equiv a_2^e \mod n.
+    $$
+    Так как $(e, \varphi(n)) = 1$, существует обратный элемент $d$ по модулю $\varphi(n)$, такой что 
+    $$
+    ed \equiv 1 \mod \varphi(n).
+    $$
+    Теперь возьмем обе стороны уравнения $a_1^e \equiv a_2^e \mod n$ и возведем в степень $d$:
+    $$
+    (a_1^e)^d \equiv (a_2^e)^d \mod n.
+    $$
+    $$
+    a_1^{ed} \equiv a_2^{ed} \mod n.
+    $$
+    Так как $ed \equiv 1 \mod \varphi(n)$, мы можем записать:
+    $$
+    a_1 \equiv a_2 \mod n.
+    $$
+    Таким образом, $\bar{a_1} = \bar{a_2}$, что доказывает инъективность.
+
+    Теперь покажем, что отображение сюръективно. Для этого нужно показать, что для любого $\bar{b} \in \mathbb{Z}_{n}^{*}$ существует $\bar{a} \in \mathbb{Z}_{n}^{*}$, такое что 
+    $$
+    \operatorname{Enc}_{e}(\bar{a}) = \bar{b}.
+    $$
+    Пусть $\bar{b} \in \mathbb{Z}_{n}^{*}$. Поскольку $(e, \varphi(n)) = 1$, существует $d$ такое, что 
+    $$
+    ed \equiv 1 \mod \varphi(n).$$
+    Теперь мы можем взять $\bar{a} = \overline{b^d}$. Тогда:
+    $$
+    \operatorname{Enc}_{e}(\bar{a}) = \overline{(b^d)^e} = \overline{b^{de}}.
+    $$
+    Так как $de \equiv 1 \mod \varphi(n)$, мы имеем:
+    $$
+    b^{de} \equiv b \mod n.
+    $$
+    Следовательно,
+    $$
+    \operatorname{Enc}_{e}(\bar{a}) = \overline{b}.
+    $$
+    Таким образом, для любого $\bar{b} \in \mathbb{Z}_{n}^{*}$ существует $\bar{a} \in \mathbb{Z}_{n}^{*}$, такое что $\operatorname{Enc}_{e}(\bar{a}) = \bar{b}$, что доказывает сюръективность.
+
+    Следовательно, искомое отображение - биекция.
+
+
+\end{enumerate}
+\end{document}

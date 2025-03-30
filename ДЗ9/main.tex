@@ -1,0 +1,198 @@
+\documentclass[a4paper]{article}
+\usepackage{setspace}
+\usepackage[T2A]{fontenc} %
+\usepackage[utf8]{inputenc} % подключение русского языка
+\usepackage[russian]{babel} %
+\usepackage[12pt]{extsizes}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}
+\setstretch{1.3}
+
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\renewcommand{\det}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+\renewcommand{\f}[2]{\frac{#1}{#2}}
+\newcommand{\dspace}{\space\space}
+\newcommand{\s}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\mul}[2]{\prod_{#1}^{#2}}
+\newcommand{\sq}[1]{\left[ {#1} \right]}
+\newcommand{\gath}[1]{\left[ \begin{array}{@{}l@{}} #1 \end{array} \right.}
+\newcommand{\case}[1]{\begin{cases} #1 \end{cases}}
+\newcommand{\ts}{\text{\space}}
+\newcommand{\lm}[1]{\underset{#1}{\lim}}
+\newcommand{\suplm}[1]{\underset{#1}{\overline{\lim}}}
+\newcommand{\inflm}[1]{\underset{#1}{\underline{\lim}}}
+
+\renewcommand{\phi}{\varphi}
+\newcommand{\lr}{\Leftrightarrow}
+\renewcommand{\r}{\Rightarrow}
+\newcommand{\rr}{\rightarrow}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\OO}{\underline{O}}
+\newcommand{\oo}{\overline{o}}
+\newcommand{\divides}{\;|\;}
+\newcommand{\leg}[2]{\left(\f{#1}{#2}\right)}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} %
+\makeatletter                               % \abs{}
+\let\oldabs\abs                             %
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}       %
+
+\begin{document}
+
+\section*{Домашнее задание на 14.03 (Теория чисел)}
+ {\large Емельянов Владимир, ПМИ гр №247}\\\\
+\begin{enumerate}
+    \item[\textbf{№1}]Найдём $\phi(22)$:
+    $$\phi(22) = 10$$
+    $g$ - первообразный корень по модулю $22$ тогда и только тогда, когда:
+    $$\forall q \divides 10: \quad  g^{\f{10}{q}} \not \equiv 1 \pmod{22}$$
+    То есть:
+    $$\case{
+        g^{5} \not \equiv 1 \pmod{ 22}\\
+        g^{2} \not \equiv 1 \pmod{22}\\
+    }$$
+    Подставим каждое значение из приведённой системы вычетов:
+    $$g \in \{\pm{1}, \pm{3}, \pm{5}, \pm{7}, \pm{9}\}$$
+    Таким образом, подходят только:
+    $$g \in \{-3, -5, 7, -9\}$$
+    Они и являются первообразными корнями.
+
+    \textbf{Ответ:} $-3, -5, 7, -9$\\
+
+    \item[\textbf{№2}]Найдём первообразный корень по модулю $242 = 2\cdot 11^2$.
+    \begin{enumerate}
+        \item[1)] Для начала найдём первообразный корень по модулю $11$:
+        
+        $g$ - первообразный корень по модулю $11$ тогда и только тогда, когда:
+        $$\forall q \divides 10: \quad  g^{\f{10}{q}} \not \equiv 1 \pmod{11}$$
+        То есть:
+        $$\case{
+            g^{5} \not \equiv 1 \pmod{11}\\
+            g^{2} \not \equiv 1 \pmod{11}\\
+        }$$
+        Найдём первое удовлетворяющее условию значение из набора:
+        $$g \in \{1, 3 \dots, 9\}$$
+        Таким образом:
+        $$g=7 \text{ - первообразный корень}$$
+
+        \item[2)] $g_1$ -первообразный корень по модулю $11^\alpha$ если:
+        $$\case{
+            g_1 = g \pmod{11}\\
+            g_1^{10} \not \equiv 1 \pmod{121}
+        }$$
+
+        $g_1$ лежит в наборе:
+        $$g_1 \in \{7, 18\}$$
+        Проверим $7$:
+        $$7^{10} \not \equiv 1 \pmod{121}$$
+        Это верно, следовательно:
+        $$7 \text{ --- п.к. по модулю } 11^\alpha$$
+        В частности:
+        $$7 \text{ --- п.к. по модулю } 121$$
+
+        \item[3)] $g_2$ -первообразный корень по модулю $2\cdot 11^\alpha$ если:
+        $$\case{
+            (g_2, 2) = 1\\
+            g_2 \equiv g_1 \pmod{121}
+        }$$
+        Это выполняется для $$g_2 = 7$$
+
+        Следовательно, 
+        $$7 \text{ --- п.к. по модулю } 2\cdot11^\alpha$$
+        В частности:
+        $$7 \text{ --- п.к. по модулю } 242$$
+    \end{enumerate}
+    \textbf{Ответ:} $ 7 $\\
+
+    \item[\textbf{№3}]Найдём $\phi(5)$:
+    $$\phi(5) = 4$$
+    $g$ - первообразный корень по модулю $5$ тогда и только тогда, когда:
+    $$\forall q \divides 4: \quad  g^{\f{4}{q}} \not \equiv 1 \pmod{5}$$
+    То есть:
+    $$g^{2} \not \equiv 1 \pmod{ 5}\\$$
+
+    Подставим каждое значение из приведённой системы вычетов:
+    $$g \in \{1, 2, 3, 4\}$$
+    Таким образом, подходят только:
+    $$g \in \{2, 3\}$$
+    Они и являются первообразными корнями по модулю $5$.
+
+    то есть:
+    $$2\pmod{5} \quad \text{ и }\quad  3\pmod{5} \text{ --- п.к.}$$
+
+    Следовательно под условие пункта a) подходят числа из набора:
+    $$g' \in \{2, 7, 12, 17, 22, 3, 8, 13, 18, 23\}$$
+
+    Чтобы они не являлись первообразными корнями по модулю 25 для каждого $g'$ должно выполняться:
+    $$\exists q \divides 16: \quad  g'^{\f{16}{q}} \equiv 1 \pmod{25}$$
+    То есть:
+    $$g'^{8}  \equiv 1 \pmod{25}\\$$
+    Подставив каждое число, получается, что подходят только:
+    $$\{7, 18\}$$
+    \textbf{Ответ: } $7, 18$\\
+
+
+    \item[\textbf{№4}]Пусть $g$ - первообразный корень по модулю 29. Тогда $x$ можно представить как 
+    $$g^k,\quad  k\in \{0, 1, \dots 27\} \text{ по модулю 28}$$
+    Найдём количество решений сравнения:
+    $$g^{21k} \equiv 1 \pmod{29}$$
+    Чтобы сравнение выполнялось, нужно, чтобы:
+    $$21k \equiv 0 \pmod{28} \lr 3k \equiv 0 \pmod{4} \lr k \equiv 0 \pmod{4} $$
+    $$\lr k = 4m \quad m \in \ZZ$$
+    Следовательно, так как $k\in \{0, 1, \dots 27\}$, то всего решений:
+    $$0 \leq 4m < 28 \lr 0 \leq m < 7 \implies \text{7 решений}$$
+    \textbf{Ответ:} $7$\\
+
+    \item[\textbf{№5}]Докажем, что число Ферма \( f_n = 2^{2^n} + 1 \) простое при условии 
+    \[
+    3^{(f_n-1)/2} \equiv -1 \pmod{f_n},
+    \]
+    Показатель числа 3 по модулю \( f_n \) — это наименьшее натуральное число \( k \), такое что 
+    \[
+    3^k \equiv 1 \pmod{f_n}.
+    \]
+    Из условия \( 3^{(f_n-1)/2} \equiv -1 \pmod{f_n} \) следует, что:
+   
+    Возведя обе части в квадрат: 
+    \[
+    3^{f_n-1} \equiv 1 \pmod{f_n}.
+    \]
+    Значит, показатель числа 3 делит \( f_n - 1 \).
+    
+    Однако 
+    \[ 3^{(f_n-1)/2} \not\equiv 1 \pmod{f_n} \]
+    Поэтому показатель не делит \( \frac{f_n-1}{2} \)
+    
+    Следовательно, показатель числа 3 равен \( f_n - 1 \).
+
+    \begin{itemize}
+        \item Если \( f_n \) простое, то по малой теореме Ферма 
+        \[
+        3^{f_n-1} \equiv 1 \pmod{f_n},
+        \]
+        и показатель числа 3 может достигать \( f_n - 1 \).
+        \item Если \( f_n \) составное, то функция Эйлера \( \varphi(f_n) \) будет меньше \( f_n - 1 \), так как у составного числа есть делители, отличные от 1 и самого числа.
+        \item Показатель числа 3 должен делить \( \varphi(f_n) \). Но если \( \varphi(f_n) < f_n - 1 \), то показатель \( f_n - 1 \) не может быть делителем \( \varphi(f_n) \). Это противоречие.
+    \end{itemize}
+
+    Единственный случай, когда показатель числа 3 равен \( f_n - 1 \), возможен только если \( f_n \) простое. Таким образом, условие 
+    \[
+    3^{(f_n-1)/2} \equiv -1 \pmod{f_n}
+    \]
+    гарантирует простоту числа Ферма \( f_n \).
+
+\end{enumerate}
+\end{document}

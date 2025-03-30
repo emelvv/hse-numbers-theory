@@ -1,0 +1,229 @@
+\documentclass[a4paper]{article}
+\usepackage{setspace}
+\usepackage[T2A]{fontenc} %
+\usepackage[utf8]{inputenc} % подключение русского языка
+\usepackage[russian]{babel} %
+\usepackage[12pt]{extsizes}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}
+\setstretch{1.3}
+
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\renewcommand{\det}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+\renewcommand{\f}[2]{\frac{#1}{#2}}
+\newcommand{\dspace}{\space\space}
+\newcommand{\s}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\mul}[2]{\prod_{#1}^{#2}}
+\newcommand{\sq}[1]{\left[ {#1} \right]}
+\newcommand{\gath}[1]{\left[ \begin{array}{@{}l@{}} #1 \end{array} \right.}
+\newcommand{\case}[1]{\begin{cases} #1 \end{cases}}
+\newcommand{\ts}{\text{\space}}
+\newcommand{\lm}[1]{\underset{#1}{\lim}}
+\newcommand{\suplm}[1]{\underset{#1}{\overline{\lim}}}
+\newcommand{\inflm}[1]{\underset{#1}{\underline{\lim}}}
+
+\renewcommand{\phi}{\varphi}
+\newcommand{\lr}{\Leftrightarrow}
+\renewcommand{\r}{\Rightarrow}
+\newcommand{\rr}{\rightarrow}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\OO}{\underline{O}}
+\newcommand{\oo}{\overline{o}}
+\newcommand{\divides}{\;|\;}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} %
+\makeatletter                               % \abs{}
+\let\oldabs\abs                             %
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}       %
+
+\begin{document}
+
+\section*{Домашнее задание на 07.02 (Теория чисел)}
+ {\large Емельянов Владимир, ПМИ гр №247}\\\\
+\begin{enumerate}
+    \item[\textbf{№1}]
+    Рассмотрим сравнение \( x^3 - 17x^2 - 7x + 11 \equiv 0 \pmod{54} \).  
+
+    Модуль \(54 = 2 \cdot 3^3\). Решим систему сравнений по модулям 2 и 27.
+    \begin{enumerate}
+        \item[1)]По модулю 2:
+        
+        Подстановка \(x = 0\) и \(x = 1\):  
+        \[x \equiv 0 \pmod{2}: 1 \not\equiv 0 \pmod{2}\]
+        \[x \equiv 1 \pmod{2}: 0 \equiv 0 \pmod{2}\]
+        Решение: \(x \equiv 1 \pmod{2}\)
+
+        \item[2)]По модулю 27:  
+        
+        Сначала решаем по модулю 3:  
+        \[x^3 - 2x^2 + 2x + 2 \equiv 0 \pmod{3}\]  
+        Проверка \(x = 0, 1, 2\):  
+
+        $$\text{\(x \equiv 1 \pmod{3}\) и \(x \equiv 2 \pmod{3}\) — решения}$$
+
+        Подъем решений до модуля 9: 
+
+        Для \(x \equiv 1 \pmod{3}\): 
+        \[x \equiv 4 \pmod{9}\]  
+        Для \(x \equiv 2 \pmod{3}\): 
+        \[x \equiv 2 \pmod{9}\]  
+
+        Подъем до модуля 27:  
+
+        \(x \equiv 4 \pmod{9}\) даёт \[x \equiv 13 \pmod{27}\]
+        \(x \equiv 2 \pmod{9}\) не даёт решений. 
+    \end{enumerate}
+
+    Объединение решений: 
+    \[
+    \begin{cases}
+    x \equiv 1 \pmod{2}, \\
+    x \equiv 13 \pmod{27}.
+    \end{cases}
+    \implies x \equiv 13 \pmod{54}\]  
+
+    \textbf{Ответ: } $x \equiv 13 \pmod{54}$\\
+
+    \item[\textbf{№2}]
+    Рассмотрим сравнение 
+    \[x^2 - 25 \equiv 0 \pmod{16^{19} \cdot 19^{91} \cdot 91^{16}}\] 
+    Модуль раскладывается: 
+    \[N = 2^{76} \cdot 19^{91} \cdot 7^{16} \cdot 13^{16}\] 
+    
+    Количество решений равно произведению количеств решений по каждому 
+    простому множителю:
+    \begin{enumerate}
+        \item[1)]Для \(2^{76}\):
+        
+        Уравнение \(x^2 \equiv 25 \pmod{2^{76}}\). Так как \(25 \equiv 1 \pmod{8}\), 
+        количество решений — 4.
+        \item[2)]Для \(19^{91}\), \(7^{16}\), \(13^{16}\): 
+
+        Уравнение \(x^2 \equiv 25 \pmod{p^k}\) имеет два решения 
+        (\(x \equiv 5\) и \(x \equiv -5 \pmod{p^k}\)), так как \(5 \not\equiv -5 \pmod{p^k}\)
+    \end{enumerate}
+    Итоговое количество решений:  
+    \[
+    4 \cdot 2 \cdot 2 \cdot 2 = 32
+    \]
+    \textbf{Ответ: } $32$
+
+    \item[\textbf{№3}]Рассмотрим сравнение \( x^2 \equiv y^2 \pmod{p} \), где \( p \)
+     — нечётное простое число. Перепишем его в виде:
+    \[
+    (x - y)(x + y) \equiv 0 \pmod{p}.
+    \]
+    Так как $p$ - простое, то:
+    $$\gath{ 
+        x \equiv y \pmod{p} \\
+        x \equiv -y \pmod{p} 
+    }$$
+    \begin{enumerate}
+        \item[1)]Количество пар для \( x \equiv y \pmod{p}\):
+    
+        Для каждого \( x \in \{0, 1, 2, ..., p-1\} \) существует ровно один 
+        \( y \equiv x \pmod{p} \). Таким образом, количество таких пар равно \( p \).
+    
+        \item[2)]Количество пар для \( x \equiv -y \pmod{p}\): 
+    
+        Для каждого \( x \in \{0, 1, 2, ..., p-1\} \) существует ровно один 
+        \( y \equiv -x \pmod{p} \). Количество таких пар также равно \( p \).
+    \end{enumerate}
+
+    Пара \( (0, 0) \) удовлетворяет обоим условиям. Таким образом, она учтена дважды.
+    Чтобы получить количество уникальных решений, вычтем 1 повторяющуюся пару.
+
+    Итоговое количество решений:
+    \[
+    p + p - 1 = 2p - 1.
+    \]
+    Что и требовалось доказать.
+
+    \item[\textbf{№4}]Рассмотрим сравнение 
+    \[(x^2 - ab)(x^2 - bc)(x^2 - ac) \equiv 0 \pmod{p}\]
+    Для его разрешимости необходимо, чтобы хотя бы одно из уравнений:
+    \[x^2 \equiv ab \pmod{p}, \quad x^2 \equiv bc \pmod{p},
+     \quad x^2 \equiv ac \pmod{p}\]
+
+    имело решение. Рассмотрим два случая.
+    \begin{enumerate}
+        \item[1)]Случай 1: 
+        
+        Хотя бы одно из чисел \(a, b, c\) делится на \(p\).
+
+        Пусть, например, \(a \equiv 0 \pmod{p}\). Тогда:
+        \[ab \equiv 0 \pmod{p}\]
+        \[ac \equiv 0 \pmod{p}\]
+        
+        Уравнения \(x^2 \equiv 0 \pmod{p}\) имеют решение \(x \equiv 0 \pmod{p}\).
+        Таким образом, в этом случае сравнение разрешимо.
+
+        \item[2)]Случай 2:
+        
+        Все числа \(a, b, c\) не делятся на \(p\).
+
+        В этом случае \(a, b, c\) обратимы, а значит и \(ab, bc, ac\) обратимы. 
+        Покажем, что хотя бы один из \[ab, bc, ac\] является квадратичным вычетом.
+
+        Предположим противное: все три элемента \(ab, bc, ac\) — 
+        квадратичные невычеты. Тогда их произведение:
+        \[
+        (ab)(bc)(ac) = a^2 b^2 c^2 = (abc)^2
+        \]
+        Квадрат любого элемента является квадратичным вычетом, 
+        поэтому \((abc)^2\) — вычет. Однако произведение трёх невычетов вычисляется как:
+        \[
+        \text{невычет} \cdot \text{невычет} \cdot \text{невычет} = (\text{вычет}) \cdot \text{невычет} = \text{невычет}.
+        \]
+        Получаем противоречие: \((abc)^2\) одновременно является вычетом и невычетом. 
+        Следовательно, предположение неверно, и хотя бы один из элементов \(ab, bc, ac\)
+         — квадратичный вычет. Соответствующее уравнение 
+         \(x^2 \equiv \text{вычет} \pmod{p}\) имеет решение.\\
+
+    \end{enumerate}
+    В обоих случаях сравнение \((x^2 - ab)(x^2 - bc)(x^2 - ac) \equiv 0 \pmod{p}\)
+    разрешимо. Таким образом, утверждение доказано для любого простого \(p\) и любых
+    \(a, b, c \in \mathbb{Z}\).\\
+
+    \item[\textbf{№5}]\begin{enumerate}
+        \item[а)]\(\sum_{x=0}^{58} \left( \frac{15x+79}{59} \right)\)
+        
+        Символ Лежандра \(\left( \frac{15x+79}{59} \right)\) 
+        преобразуется к \(\left( \frac{15x+20}{59} \right)\), 
+        так как \(79 \equiv 20 \pmod{59}\).  
+
+        Коэффициент 15 взаимно прост с 59, поэтому \(15x + 20\) 
+        пробегает все вычеты по модулю 59 при \(x = 0, 1, \dots, 58\).
+
+        Сумма символов Лежандра по всем \(a \pmod{59}\) (включая 0) равна 0. Это следует из того, что количество квадратичных вычетов и невычетов одинаково, и их вклады взаимно сокращаются.  
+
+        \textbf{Ответ: } $0$\\
+
+        \item[б)]\(\sum_{x=0}^{57} \left( \frac{15x+79}{59} \right)\)
+        
+        Так как верхний предел \(x = 57\), а при \(x = 58\) выражение \(15x + 20\)
+         даёт \(5 \pmod{59}\), нужно посчитать $\left( \frac{5}{59} \right)$.
+        \[
+        \left( \frac{5}{59} \right) = 1 \text{ т.к. \(5 \equiv 64 \equiv 8^2 \pmod{59}\)}
+        \]  
+        Получается, что:
+        \[\sum_{x=0}^{57} \left( \frac{15x+79}{59} \right) =
+        \sum_{x=0}^{58}\left( \frac{15x+79}{59} \right) - \left( \frac{5}{59} \right) = 
+        0-1 = -1\]
+        \textbf{Ответ:} $-1$
+    \end{enumerate}
+\end{enumerate}
+\end{document}

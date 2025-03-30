@@ -1,0 +1,264 @@
+\documentclass[a4paper]{article}
+\usepackage{setspace}
+\usepackage[T2A]{fontenc} %
+\usepackage[utf8]{inputenc} % подключение русского языка
+\usepackage[russian]{babel} %
+\usepackage[12pt]{extsizes}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}
+\setstretch{1.3}
+
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\renewcommand{\det}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+\renewcommand{\f}[2]{\frac{#1}{#2}}
+\newcommand{\dspace}{\space\space}
+\newcommand{\s}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\mul}[2]{\prod_{#1}^{#2}}
+\newcommand{\sq}[1]{\left[ {#1} \right]}
+\newcommand{\gath}[1]{\left[ \begin{array}{@{}l@{}} #1 \end{array} \right.}
+\newcommand{\case}[1]{\begin{cases} #1 \end{cases}}
+\newcommand{\ts}{\text{\space}}
+\newcommand{\lm}[1]{\underset{#1}{\lim}}
+\newcommand{\suplm}[1]{\underset{#1}{\overline{\lim}}}
+\newcommand{\inflm}[1]{\underset{#1}{\underline{\lim}}}
+
+\renewcommand{\phi}{\varphi}
+\newcommand{\lr}{\Leftrightarrow}
+\renewcommand{\r}{\Rightarrow}
+\newcommand{\rr}{\rightarrow}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\OO}{\underline{O}}
+\newcommand{\oo}{\overline{o}}
+\newcommand{\divides}{\;|\;}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} %
+\makeatletter                               % \abs{}
+\let\oldabs\abs                             %
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}       %
+
+\begin{document}
+
+\section*{Домашнее задание на 31.01 (Теория чисел)}
+ {\large Емельянов Владимир, ПМИ гр №247}\\\\
+\begin{enumerate}
+    \item[\textbf{№1}]Пусть стороны треугольника $a, b, c \in \ZZ$. Выполняется т.Пифагора:
+    $$a^2 + b^2 = c^2$$
+
+    \item[\textbf{№2}]Решим сравнения:
+    \begin{enumerate}
+        \item[a)] $19x \equiv 2 (mod 88)$
+        
+        Это равносильно:
+        $$19x-2 = 88y \implies 19x-88y=2$$
+        Решим:
+        $$\mat{
+            19 & -88 & | & -2 \\
+            1 & 0 & | & 0 \\
+            0 & 1 & | & 0 \\
+
+        } \implies\mat{
+            19 & 7 & | & -2 \\
+            1 & 5 & | & 0 \\
+            0 & 1 & | & 0 \\
+
+        } \implies \mat{
+            -2 & 7 & | & -2 \\
+            -14 & 5 & | & 0 \\
+            -3 & 1 & | & 0 \\
+
+        }$$$$\implies \mat{
+            2 & 1 & | & -2 \\
+            14 & -37 & | & 0 \\
+            3 & -8 & | & 0 \\
+
+        }\implies \mat{
+            1 & 0 & | & -2 \\
+            -37 & 88 & | & 0 \\
+            -8 & 19 & | & 0 \\
+
+        }\implies \mat{
+            1 & 0 & | & 0 \\
+            -37 & 88 & | & -74 \\
+            -8 & 19 & | & 16 \\
+
+        }$$
+        $$\implies \mat{x\\y} = \mat{88\\19}t + \mat{-74\\16} \implies x = 88t-74 \quad t\in \ZZ$$
+    
+        \item[б)]$102x \equiv 9 (mod 165)$
+        Это эквивалентно:
+        $$102x - 165y = 9$$
+        Решим:
+        $$\mat{
+            102 & -165 & | & -9 \\
+            1 & 0 & | & 0 \\
+            0 & 1 & | & 0 \\
+
+        } \implies \mat{
+            -24 & 3 & | & -9 \\
+            3 & -21 & | & 0 \\
+            -2 & 15 & | & 0 \\
+        }\implies \mat{
+            0 & 3 & | & -9 \\
+            -165 & -21 & | & 0 \\
+            118 & 15 & | & 0 \\
+        }$$$$\implies \mat{
+            3 & 0 & | & 0 \\
+            -21 & -165 & | & -63 \\
+            15 & 118 & | & 45 \\
+        }\implies \mat{x\\y} = \mat{-165\\118}t + \mat{-63\\45} \implies$$
+        $$\implies x = -165t - 63 \quad t\in \ZZ$$
+    \end{enumerate}
+
+    \item[\textbf{№3}]По теореме Ферма:
+    $$5^{p-1} = 1 (mod \; p)$$
+    При этом:
+    $$5^{p^2} = 1 (mod \; p)$$
+    Значит нужно, чтобы:
+    $$p-1 \divides p^2 \implies p^2 \equiv 0 (mod \; p-1)$$
+    Т.к. $p$ и $p-1$ взаимно просты, то можно сократить на $p$:
+    $$p \equiv 0 (mod \; p-1) \implies 1 = (p-1)t $$
+    При $t \neq 0$:
+    $$ p = \f{1+t}{t} = \f{1}{t}+1 \implies t = 1, -1 \implies p = 2, 0$$
+    При $t = 0$:
+    $$1 = 0 \quad \emptyset$$
+    
+    \textbf{Ответ:} $0$ и $2$
+
+    \item[\textbf{№4}]Чтобы найти все основания $ a $, для которых число $ n = 15 $ является псевдопростым, мы должны проверить условие:
+
+    $$
+    a^{n-1} \equiv 1 \pmod{n}
+    $$
+    
+    где $ n - 1 = 14 $. Таким образом, нам нужно проверить:
+    
+    $$
+    a^{14} \equiv 1 \pmod{15}
+    $$
+    
+    Сначала найдем все числа $ a $, такие что $ (a, 15) = 1 $. Число 15 имеет делители 3 и 5, поэтому $ a $ не должно быть кратно 3 или 5. Таким образом, возможные значения $ a $ в пределах от 1 до 14:
+
+    $$
+    a = 1, 2, 4, 7, 8, 11, 13, 14
+    $$
+    Условие $$
+    a^{14} \equiv 1 \pmod{15}
+    $$
+    По теореме Эйлера эквивалентно (т.к. $\phi(15) = 8$, значит $a^{8} = 1 \pmod{15}$):
+    $$
+    a^{6} \equiv 1 \pmod{15}
+    $$
+
+    Теперь нам нужно проверить каждое значение $ a $ из списка $ a = 2, 4, 7, 8, 11, 13, 14 $ на выполнение условия $ a^{6} \equiv 1 \pmod{15} $.
+    
+    1. Для $ a = 2 $:
+    $$
+    2^{6} = 64 \quad \Rightarrow \quad 64 \mod 15 = 4 \quad \Rightarrow \quad 2^{6} \equiv 4 \pmod{15} \quad (\text{не подходит}).
+    $$
+
+    2. Для $ a = 4 $:
+    $$
+    4^{6} = (4^{2})^{3} = 16^{3} \equiv 1^{3} \equiv 1 \pmod{15} \quad (\text{подходит}).
+    $$
+
+    3. Для $ a = 7 $:
+    $$
+    7^{6} = (7^{2})^{3} = 49^{3} \equiv 4^{3} \pmod{15}.
+    $$
+    Теперь вычислим $ 4^{3} $:
+    $$
+    4^{3} = 64 \quad \Rightarrow \quad 64 \mod 15 = 4 \quad \Rightarrow \quad 7^{6} \equiv 4 \pmod{15} \quad (\text{не подходит}).
+    $$
+
+    4. Для $ a = 8 $:
+    $$
+    8^{6} = (8^{2})^{3} = 64^{3} \equiv 4^{3} \pmod{15}.
+    $$
+    Как и в предыдущем случае:
+    $$
+    4^{3} = 64 \quad \Rightarrow \quad 64 \mod 15 = 4 \quad \Rightarrow \quad 8^{6} \equiv 4 \pmod{15} \quad (\text{не подходит}).
+    $$
+
+    5. Для $ a = 11 $:
+    $$
+    11^{6} = (11^{2})^{3} = 121^{3} \equiv 1^{3} \equiv 1 \pmod{15} \quad (\text{подходит}).
+    $$
+
+    6. Для $ a = 13 $:
+    $$
+    13^{6} = (13^{2})^{3} = 169^{3} \equiv 4^{3} \pmod{15}.
+    $$
+    Как и ранее:
+    $$
+    4^{3} = 64 \quad \Rightarrow \quad 64 \mod 15 = 4 \quad \Rightarrow \quad 13^{6} \equiv 4 \pmod{15} \quad (\text{не подходит}).
+    $$
+
+    7. Для $ a = 14 $:
+    $$
+    14^{6} = (-1)^{6} \equiv 1 \pmod{15} \quad (\text{подходит}).
+    $$
+    
+    \textbf{Ответ:} $4, 11, 14$
+
+    \item[\textbf{№5}]$\case{
+        x \equiv 2 \pmod{11}\\ 
+        x \equiv 1 \pmod{13}
+    }$
+    Это равносильно:
+    $$\case{
+        x-2 = 11k\\
+        x-1 = 13p\\
+    }, \quad k, p \in \ZZ$$
+    Следовательно,
+    $$x = 11k+2 = 13p+1 \implies 11k-13p = -1$$
+    Решим диафантово уравнение:
+    $$\mat{
+        11 & -13 & | & 1\\ 
+        1 & 0 & | & 0\\
+        0 & 1 & | & 0\\
+    } \implies \mat{
+        -2 & -13 & | & 1\\ 
+        1 & 0 & | & 0\\
+        1 & 1 & | & 0\\
+    }\implies \mat{
+        -2 & 1& | & 1\\ 
+        1 & -7 & | & 0\\
+        1 & -6 & | & 0\\
+    }
+    $$
+    $$\implies \mat{
+        0 & 1& | & 1\\ 
+        -13 & -7 & | & 0\\
+        -11 & -6 & | & 0\\
+    }\implies \mat{
+        1 & 0 & | & 0\\ 
+        -7 & -13 & | & 7\\
+        -6 & -11 & | & 6\\
+    } \implies \mat{k \\ p} = \mat{-13 \\ -11}t + \mat{7\\6}$$
+    Получаем:
+    $$\case{
+        x = 11\cdot(-13t+7)+2\\
+        x = 13\cdot(-11t+6)+1
+    }\implies \case{
+        x = -143t+79\\
+        x = -143t+79
+    } \implies x = -143t+79 \quad t \in \ZZ$$
+
+    \textbf{Ответ: }$x = -143t+79 \quad t \in \ZZ \lr x \equiv 79 \pmod{-143}$
+    
+
+\end{enumerate}
+\end{document}

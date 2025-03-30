@@ -1,0 +1,186 @@
+\documentclass[a4paper]{article}
+\usepackage{setspace}
+\usepackage[T2A]{fontenc} %
+\usepackage[utf8]{inputenc} % подключение русского языка
+\usepackage[russian]{babel} %
+\usepackage[12pt]{extsizes}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}
+\setstretch{1.3}
+
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\renewcommand{\det}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+\renewcommand{\f}[2]{\frac{#1}{#2}}
+\newcommand{\dspace}{\space\space}
+\newcommand{\s}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\mul}[2]{\prod_{#1}^{#2}}
+\newcommand{\sq}[1]{\left[ {#1} \right]}
+\newcommand{\gath}[1]{\left[ \begin{array}{@{}l@{}} #1 \end{array} \right.}
+\newcommand{\case}[1]{\begin{cases} #1 \end{cases}}
+\newcommand{\ts}{\text{\space}}
+\newcommand{\lm}[1]{\underset{#1}{\lim}}
+\newcommand{\suplm}[1]{\underset{#1}{\overline{\lim}}}
+\newcommand{\inflm}[1]{\underset{#1}{\underline{\lim}}}
+
+\renewcommand{\phi}{\varphi}
+\newcommand{\lr}{\Leftrightarrow}
+\renewcommand{\r}{\Rightarrow}
+\newcommand{\rr}{\rightarrow}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\OO}{\underline{O}}
+\newcommand{\oo}{\overline{o}}
+\newcommand{\divides}{\;|\;}
+\newcommand{\leg}[2]{\left(\f{#1}{#2}\right)}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} %
+\makeatletter                               % \abs{}
+\let\oldabs\abs                             %
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}       %
+
+\begin{document}
+
+\section*{Домашнее задание на 28.02 (Теория чисел)}
+ {\large Емельянов Владимир, ПМИ гр №247}\\\\
+\begin{enumerate}
+    \item[\textbf{№1}]$x^2 \equiv 3 \pmod{143}$
+    
+    Найдём символ Якоби:
+    $$\leg{3}{143} = \leg{143}{3}\cdot (-1)^{\f{142\cdot2}{4}} = \leg{2}{3}\cdot (-1)^{71} = -2 \pmod{3} = 1$$
+    Следовательно, сравнение разрешимо.
+
+    \item[\textbf{№2}]$x^2 \equiv 3 \pmod{119}$
+    
+    Найдём символ Якоби:
+    $$\leg{3}{119} = \leg{3}{17}\cdot \leg{3}{7} = 3^{8}\pmod{17} \cdot 3^{3}\pmod{7} = (-1) \cdot (-1) =1 $$
+    Следовательно, сравнение разрешимо
+
+    \item[\textbf{№3}]Мы знаем, что:
+    $$\s{n=1}{1001}\leg{n}{1001} = \s{n=1}{499}\leg{n}{1001} +\leg{500}{1001}+\leg{501}{1001} +\s{n=502}{1001}\leg{n}{1001} = 0$$
+    В силу симметрии символа Якоби ($\leg{n}{1001} = \leg{1001-n}{1001}$) это сводится к:
+    $$2\s{n=1}{499}\leg{n}{1001} +2\leg{500}{1001} = 0 \lr  \s{n=1}{499}\leg{n}{1001} = -\leg{500}{1001} $$
+    Найдём правую часть:
+    $$-\leg{500}{1001} = -(\leg{500}{7} \cdot \leg{500}{11} \cdot \leg{500}{13}) = -(\leg{3}{7} \cdot \leg{5}{11} \cdot \leg{6}{13}) = $$
+    $$=-(3^3 \pmod{7} \cdot 5^5 \pmod{11} \cdot 6^6\pmod{13}) = -((-1)\cdot 1 \cdot (-1)) = -1$$
+
+    \textbf{Ответ: } $-1$\\
+
+    \item[\textbf{№4}]
+    Пусть \( P \) — нечётное число, \( P \geq 3 \). Требуется доказать, что символ Лежандра \( \left( \frac{2}{P} \right) = (-1)^{\left[ \frac{P+1}{4} \right]} \). Известно, что \( \left( \frac{2}{P} \right) = (-1)^{\frac{P^2 - 1}{8}} \). Достаточно показать, что показатели степени совпадают по модулю 2, т.е.:
+    \[
+    \frac{P^2 - 1}{8} \equiv \left[ \frac{P + 1}{4} \right] \pmod{2}.
+    \]
+    Так как $P$ - нечётное достаточно рассмотреть только два случая в зависимости от остатка \( P \) при делении на 4:
+    \begin{enumerate}
+        \item[1)]\( P = 4k + 1 \), где \( k \in \mathbb{Z} \)
+        
+        Вычислим показатель для символа Лежандра:
+        \[
+        \frac{P^2 - 1}{8} = \frac{(4k+1)^2 - 1}{8} = \frac{16k^2 + 8k}{8} = 2k^2 + k.
+        \]
+        Целая часть:
+        \[
+        \left[ \frac{P + 1}{4} \right] = \left[ \frac{4k + 2}{4} \right] = \left[ k + 0.5 \right] = k.
+        \]
+        По модулю 2:
+        \[
+        2k^2 + k \equiv k \pmod{2}, \quad k \equiv k \pmod{2}.
+        \]
+
+        \item[2)]\( P = 4k + 3 \), где \( k \in \mathbb{Z} \)
+        
+        Вычислим показатель для символа Лежандра:
+        \[
+        \frac{P^2 - 1}{8} = \frac{(4k+3)^2 - 1}{8} = \frac{16k^2 + 24k + 8}{8} = 2k^2 + 3k + 1.
+        \]
+        Целая часть:
+        \[
+        \left[ \frac{P + 1}{4} \right] = \left[ \frac{4k + 4}{4} \right] = \left[ k + 1 \right] = k + 1.
+        \]
+        По модулю 2:
+        \[
+        2k^2 + 3k + 1 \equiv k + 1 \pmod{2}, \quad k + 1 \equiv k + 1 \pmod{2}.
+        \]
+    \end{enumerate}
+
+    В обоих случаях показатели степени совпадают по модулю 2, следовательно:
+    \[
+    \left( \frac{2}{P} \right) = (-1)^{\frac{P^2 - 1}{8}} = (-1)^{\left[ \frac{P + 1}{4} \right]}.
+    \]
+
+    \item[\textbf{№5}]
+    Пусть \( P = 4ab - 1 \), где \( a, b \in \mathbb{N} \). Предположим, что сравнение \( x^2 \equiv -a \pmod{P} \) разрешимо. Тогда существует \( x \in \mathbb{Z} \), такое что:
+    \[
+    x^2 + a \equiv 0 \pmod{P} \implies x^2 + a = kP \quad \text{для некоторого } k \in \mathbb{Z}.
+    \]
+    Подставляя \( P = 4ab - 1 \), получим:
+    \[
+    x^2 + a = k(4ab - 1) \implies x^2 + a + k = 4abk.
+    \]
+    Рассмотрим это равенство по модулю 4. Поскольку квадрат любого числа по модулю 4 равен 0 или 1, левая часть \( x^2 + a + k \) может быть:
+    \begin{enumerate}
+        \item[]
+        \( 0 + a + k \equiv a + k \pmod{4} \), если \( x^2 \equiv 0 \pmod{4} \)
+        \item[]
+        \( 1 + a + k \equiv a + k + 1 \pmod{4} \), если \( x^2 \equiv 1 \pmod{4} \)
+    \end{enumerate}
+
+    Правая часть \( 4abk \equiv 0 \pmod{4} \). Следовательно:
+
+    \begin{enumerate}
+        \item[]Если \( x^2 \equiv 0 \pmod{4} \), то \( a + k \equiv 0 \pmod{4} \)
+        \item[]Если \( x^2 \equiv 1 \pmod{4} \), то \( a + k \equiv 3 \pmod{4} \)
+    \end{enumerate}    
+    Далее, умножим исходное сравнение \( x^2 \equiv -a \pmod{P} \) на \( 4b \):
+    \[
+    4b x^2 \equiv -4ab \pmod{P}.
+    \]
+    Так как \( 4ab = P + 1 \), подставляем:
+    \[
+    4b x^2 \equiv -(P + 1) \equiv -1 \pmod{P}.
+    \]
+    Получаем:
+    \[
+    (2x)^2 \cdot b \equiv -1 \pmod{P} \implies m^2 \equiv -4b \pmod{P}, \quad \text{где } m = 2x.
+    \]
+    Рассмотрим символ Лежандра \( \left( \frac{-4b}{P} \right) \). Поскольку \( P \equiv 3 \pmod{4} \), имеем:
+    \[
+    \left( \frac{-1}{P} \right) = -1, \quad \left( \frac{4}{P} \right) = 1.
+    \]
+    Таким образом:
+    \[
+    \left( \frac{-4b}{P} \right) = \left( \frac{-1}{P} \right) \cdot \left( \frac{4}{P} \right) \cdot \left( \frac{b}{P} \right) = -1 \cdot \left( \frac{b}{P} \right).
+    \]
+    Если сравнение \( m^2 \equiv -4b \pmod{P} \) разрешимо, то \( \left( \frac{-4b}{P} \right) = 1 \), откуда:
+    \[
+    -1 \cdot \left( \frac{b}{P} \right) = 1 \implies \left( \frac{b}{P} \right) = -1.
+    \]
+
+    Применим квадратичный закон взаимности для \( \left( \frac{b}{P} \right) \). Поскольку \( P \equiv -1 \pmod{b} \), то:
+    \[
+    \left( \frac{b}{P} \right) = \left( \frac{-1}{b} \right) \cdot (-1)^{\frac{(b-1)(P-1)}{4}}.
+    \]
+    Учитывая \( P = 4ab - 1 \), получаем:
+    \[
+    \frac{(b-1)(4ab - 2)}{4} = \frac{(b-1)(2ab - 1)}{2}.
+    \]
+    Если \( b \) нечетно, \( b-1 \) четно, и выражение сводится к \( (-1)^{(b-1)/2} \). Тогда:
+    \[
+    \left( \frac{b}{P} \right) = (-1)^{(b-1)/2} \cdot (-1)^{(b-1)/2} = 1.
+    \]
+    Это противоречит \( \left( \frac{b}{P} \right) = -1 \). Аналогичное противоречие возникает для \( \left( \frac{a}{P} \right) \).
+
+\end{enumerate}
+\end{document}

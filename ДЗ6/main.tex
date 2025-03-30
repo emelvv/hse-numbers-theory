@@ -1,0 +1,179 @@
+\documentclass[a4paper]{article}
+\usepackage{setspace}
+\usepackage[T2A]{fontenc} %
+\usepackage[utf8]{inputenc} % подключение русского языка
+\usepackage[russian]{babel} %
+\usepackage[12pt]{extsizes}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}
+\setstretch{1.3}
+
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\renewcommand{\det}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+\renewcommand{\f}[2]{\frac{#1}{#2}}
+\newcommand{\dspace}{\space\space}
+\newcommand{\s}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\mul}[2]{\prod_{#1}^{#2}}
+\newcommand{\sq}[1]{\left[ {#1} \right]}
+\newcommand{\gath}[1]{\left[ \begin{array}{@{}l@{}} #1 \end{array} \right.}
+\newcommand{\case}[1]{\begin{cases} #1 \end{cases}}
+\newcommand{\ts}{\text{\space}}
+\newcommand{\lm}[1]{\underset{#1}{\lim}}
+\newcommand{\suplm}[1]{\underset{#1}{\overline{\lim}}}
+\newcommand{\inflm}[1]{\underset{#1}{\underline{\lim}}}
+
+\renewcommand{\phi}{\varphi}
+\newcommand{\lr}{\Leftrightarrow}
+\renewcommand{\r}{\Rightarrow}
+\newcommand{\rr}{\rightarrow}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\OO}{\underline{O}}
+\newcommand{\oo}{\overline{o}}
+\newcommand{\divides}{\;|\;}
+\newcommand{\leg}[2]{\left(\f{#1}{#2}\right)}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} %
+\makeatletter                               % \abs{}
+\let\oldabs\abs                             %
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}       %
+
+\begin{document}
+
+\section*{Домашнее задание на 21.02 (Теория чисел)}
+ {\large Емельянов Владимир, ПМИ гр №247}\\\\
+\begin{enumerate}
+    \item[\textbf{№1}]$x^2 \equiv 219 \pmod{383}$2
+    Найдём символ Лежандра:
+    $$\leg{219}{383} = \leg{383}{219} \cdot (-1)^{\f{218\cdot 382}{4}} = -\leg{383}{219} =- \leg{64}{219} = -\leg{2^6}{219} = -\leg{2}{219}^6 $$
+    $$=-\left((-1)^{\f{219^2-1}{8}}\right)^6 = -(-1)^{219^2-1} = -1$$
+    \textbf{Ответ: } неразрешимо
+
+    \item[\textbf{№2}]Рассмотрим:
+    $$\leg{5}{p} = (-1)^{\f{4(p-1)}{4}}\leg{p}{5} = \leg{p}{5}$$
+    При $p = \pm 1 \pmod{5}$:
+    $$\leg{p}{5} = 1$$
+    При $p = \pm 2 \pmod{5}$:
+    $$\leg{p}{5} = -1$$
+    Получаем, что:
+    $$\leg{5}{p} = \case{
+        1 , \text{ при } p \equiv \pm 1 \pmod{5}\\
+        -1, \text{ при } p \equiv \pm 2 \pmod{5}
+    }$$
+
+    \item[\textbf{№3}]Модуль \(128 \cdot 151 \cdot 199\) раскладывается на взаимно
+     простые множители: 
+     $$\text{\(2^7\), \(151\), \(199\)}$$ 
+     Получаем систему:
+     $$\case{
+        x^2+2x+72=0 \pmod{2^7}\\
+        x^2+2x+72=0 \pmod{151}\\
+        x^2+2x+72=0 \pmod{199}
+     }\lr \case{
+        (x+1)^2=-71 \pmod{2^7}\\
+        (x+1)^2=-71 \pmod{151}\\
+        (x+1)^2=-71 \pmod{199}
+     }
+     $$
+    У первого сравнения, очевидно, 2 решения, а для остальных найдём символы Лежандра:
+    $$\leg{-71}{151}=\leg{80}{151}=\leg{2^4\cdot 5}{151} = \leg{2}{151}^4\cdot \leg{5}{151} = $$
+    $$=\leg{2}{151}^4\cdot \leg{5}{151} = \leg{5}{151} = \leg{151}{5}(-1)^{\f{150\cdot 4}{4}} = 1$$
+    
+    $$\leg{-71}{199} = \leg{128}{199} = \leg{2^7}{199} = \leg{2}{199} = 1$$
+    Следовательно, у второго и третьего сравнения по 2 решения. Итоговое количество решений:
+    $$2 \times 2 \times 2 = 8$$
+    \textbf{Ответ: } $8$
+
+    \item[\textbf{№4}]Чтобы доказать, что для простого числа Ферма 
+    \( f_n = 2^{2^n} + 1 \) выполняется сравнение 
+    \( 3^{(f_n-1)/2} \equiv -1 \pmod{f_n} \),
+     воспользуемся критерием Эйлера.
+        
+    Для простого \( p \) и целого \( a \), не делящегося на \( p \), верно:
+    \[
+    a^{(p-1)/2} \equiv \left( \frac{a}{p} \right) \pmod{p},
+    \]
+    где \( \left( \frac{a}{p} \right) \) — символ Лежандра.
+    Подставим $a = 3$ и $p = f_n$:
+    \[
+    3^{(f_n-1)/2} \equiv \leg{3}{f_n}\pmod{f_n}
+    \]
+    Докажем, что $\leg{3}{f_n} = -1$
+    $$\leg{3}{f_n} = \leg{f_n}{3} (-1)^{\f{f_n-1}{2}} = \leg{2^{2^n}+1}{3} (-1)^{2^{2^n-1}} =
+     \leg{2^{2^n}+1}{3} = $$
+     $$=\leg{(-1)^{2^n}+1}{3} = \leg{-1}{3} = -1$$
+    
+     Следовательно:
+     \[
+        3^{\f{f_n-1}{2}} \equiv -1\pmod{f_n}
+    \]
+    ч.т.д.
+
+    \item[\textbf{№5}]
+    Пусть \( p \) и \( q = 2p + 1 \) — простые числа, причём 
+    \( p \equiv 3 \pmod{4} \). Требуется доказать, что число Мерсенна 
+    \( M_p = 2^p - 1 \) простое только при \( p = 3 \).
+    
+    Подставим \( p = 3 \):  
+    \[ q = 2 \cdot 3 + 1 = 7 \text{ (простое)}\] 
+    \[ M_3 = 2^3 - 1 = 8 - 1 = 7 \text{ (простое)}\]
+    Условие выполнено.
+
+    Покажем, что для \( p > 3 \) число \( M_p \) составное:
+    
+    Так как \( q = 2p + 1 \) — простое, применим малую теорему Ферма к \( 2 \) по модулю \( q \):  
+    \[
+    2^{q-1} \equiv 1 \pmod{q}.
+    \]  
+    Поскольку \( q - 1 = 2p \), получаем:  
+    \[
+    2^{2p} \equiv 1 \pmod{q}.
+    \]  
+    Это означает, что \( 2^p \equiv \pm 1 \pmod{q} \).  
+
+    \begin{enumerate}
+        \item[1)]
+        Если \( 2^p \equiv 1 \pmod{q} \):
+    
+        Тогда \( 2^p - 1 \equiv 0 \pmod{q} \), то есть \( q \) делит \( M_p \).  
+    
+        Так как \( q = 2p + 1 \) и \( p > 3 \), то \( q < M_p \), следовательно, \( M_p \) составное.  
+        
+        \item[2)]Если \( 2^p \equiv -1 \pmod{q} \):
+        \item[] 
+        Возведём в квадрат:  
+        \[
+        (2^p)^2 = 2^{2p} \equiv 1 \pmod{q}.
+        \]  
+        Это совпадает с малой теоремой Ферма, но для \( p \equiv 3 \pmod{4} \) выполняется следующее: 
+        \begin{enumerate}
+            \item[$\cdot$]\( p = 4k + 3 \), тогда \( q = 2(4k + 3) + 1 = 8k + 7 \)
+            \item[$\cdot$] Число \( 2 \) является квадратичным вычетом по модулю \( q \), так как \( q \equiv 7 \pmod{8} \) (по теореме с лекции). 
+            По критерию Эйлера:  
+            \[
+            2^{\frac{q-1}{2}} \equiv 1 \pmod{q}.
+            \]  
+            Подставляя \( \frac{q-1}{2} = 4k + 3 \), получаем:  
+            \[
+            2^{4k + 3} \equiv 1 \pmod{q}.
+            \]  
+            Но \( 2^{4k + 3} = 2^p \), поэтому \( 2^p \equiv 1 \pmod{q} \).  
+            Это сводится к первому случаю, где \( q \) делит \( M_p \), делая его составным    
+        \end{enumerate}
+
+        Следовательно, $M_p$ простое только при $p = 3$
+    \end{enumerate}
+\end{enumerate}
+\end{document}

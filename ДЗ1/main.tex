@@ -1,0 +1,114 @@
+\documentclass[a4paper]{article}
+\usepackage{setspace}
+\usepackage[T2A]{fontenc} %
+\usepackage[utf8]{inputenc} % подключение русского языка
+\usepackage[russian]{babel} %
+\usepackage[12pt]{extsizes}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{tikz}
+
+\usetikzlibrary{positioning}
+\setstretch{1.3}
+
+\newcommand{\mat}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+\renewcommand{\det}[1]{\begin{vmatrix} #1 \end{vmatrix}}
+\renewcommand{\f}[2]{\frac{#1}{#2}}
+\newcommand{\dspace}{\space\space}
+\newcommand{\s}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\mul}[2]{\prod_{#1}^{#2}}
+\newcommand{\sq}[1]{\left[ {#1} \right]}
+\newcommand{\gath}[1]{\left[ \begin{array}{@{}l@{}} #1 \end{array} \right.}
+\newcommand{\case}[1]{\begin{cases} #1 \end{cases}}
+\newcommand{\ts}{\text{\space}}
+\newcommand{\lm}[1]{\underset{#1}{\lim}}
+\newcommand{\suplm}[1]{\underset{#1}{\overline{\lim}}}
+\newcommand{\inflm}[1]{\underset{#1}{\underline{\lim}}}
+
+\renewcommand{\phi}{\varphi}
+\newcommand{\lr}{\Leftrightarrow}
+\renewcommand{\r}{\Rightarrow}
+\newcommand{\rr}{\rightarrow}
+\renewcommand{\geq}{\geqslant}
+\renewcommand{\leq}{\leqslant}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\OO}{\underline{O}}
+\newcommand{\oo}{\overline{o}}
+
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert} %
+\makeatletter                               % \abs{}
+\let\oldabs\abs                             %
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}       %
+
+\begin{document}
+
+\section*{Домашнее задание на 17.01 (Теория чисел)}
+ {\large Емельянов Владимир, ПМИ гр №247}\\\\
+\begin{enumerate}
+    \item[\textbf{№1}]Найдём $(123456789, 987654321)$:
+    $$(123456789, 987654321) = (123456789, 987654321-8\cdot 123456789)$$
+    $$ = (123456789-9\cdot 13717421, 9) = (0, 9) = 9$$
+
+    \textbf{Ответ: }$9$
+
+    \item[\textbf{№2}]Чтобы доказать, что дроби несократимы при всех натуральных значениях $ n $, мы будем использовать критерий несократимости: дробь $\frac{a}{b}$ несократима, если $(a, b) = 1$.
+    \begin{enumerate}
+        \item[а)] $\f{2n+13}{n+7}$
+        $$(2n+13, n+7) = (n+6, n+7) = (n+6, 1) = 1$$
+        \item[б)]  $\f{2n^2-1}{n+1}$
+        $$(2n^2-1, n+1) = (2n^2-1, 2n^2+2n) = (-2n-1, n+1)$$
+        $$=(-2n-1, 2n+2) = (1, 2n+2) = 1$$
+    \end{enumerate}
+
+    \item[\textbf{№3}]Пусть: $$a = 2a'+1, \quad b=2b'+1, \quad c = 2c'+1$$
+    т.к. $a, b, c$ - нечётные
+
+    Тогда:
+    $$(\f{b+c}{2}, \f{a+c}{2}, \f{a+b}{2})= (\f{2b'+1+2c'+1}{2}, \f{2a'+1+2c'+1}{2}, \f{2a'+1+2b'+1}{2}) = $$
+    $$(\f{2b'+2c'+2}{2}, \f{2a'+2c'+2}{2}, \f{2a'+2b'+2}{2}) = (b'+c'+1, a'+c'+1, a'+b'+1)  = $$
+    $$=(b'-a', a'+c'+1, b'-c')=(c'-a', a'+c'+1, b'-c') = (c'-a', 2c'+1, b'-c') = $$
+    $$=(2c'-2a', 2c'+1, 2b'-2c') = (2a'+1, 2c'+1, 2b'+1) = (a, b, c)$$
+    \textbf{ч.т.д.}
+
+    \item[\textbf{№4}]Докажем, что биномиальный коэффициент $\binom{a}{b}$ делится на $a$, где $a$ и $b$ — взаимно простые натуральные числа и $a \geq b$.
+
+    Биномиальный коэффициент $\binom{a}{b}$ определяется как:
+
+    $$
+    \binom{a}{b} = \frac{a!}{b!(a-b)!} = \f{a}{b}\cdot \frac{(a-1)!}{(b-1)!(a-b)!} = \f{a}{b} \binom{a-1}{b-1}\implies
+    $$
+    $$
+    \implies b\binom{a}{b} = a\binom{a-1}{b-1} $$
+    Следовательно, получаем:
+    $$a\; |\;b\binom{a}{b} \implies a \;|\;\binom{a}{b}  \text{ (т.к $(a, b) = 1$)}
+    $$
+    \textbf{ч.т.д.}
+
+    \item[\textbf{№5}]Числа ферма выражаются по формуле $f_k = 2^{2^k}+1$. Найдём рекурсивную формулу:
+    $$f_{k+1} = 2^{2^{k+1}}+1 = 2^{2\cdot 2^k}+1 = (2^{2^k}+1-1)^2+1 = (f_{k}-1)^2+1$$
+    Теперь докажем по индукции формулу $f_k = f_0\cdot ... \cdot f_{k-1}+2$:
+    \begin{enumerate}
+        \item[1)] \underline{База:}
+        $$f_2 = 2^{2^2}+1 = 16+1=17 = f_0\cdot f_1 +2= 15+2=17 \text{ - верно}$$
+        \item[2)] \underline{Шаг:}
+        
+        Предположение индукции:
+        $$f_k = f_0\cdot ... \cdot f_{k-1}+2 \implies f_k-f_0\cdot ... \cdot f_{k-1} = 2$$
+        Выведем $f_{k+1}$:
+        $$f_{k+1} = (f_{k}-1)^2+1 = (f_0\cdot ... \cdot f_{k-1}+1)\cdot (f_k-1)+1 = $$
+        $$=f_0\cdot ... \cdot f_{k}+f_k-f_0\cdot...\cdot f_{k-1}-1+1 = $$
+        $$=f_0\cdot ... \cdot f_{k}+f_k-f_0\cdot...\cdot f_{k-1}= f_0\cdot ... \cdot f_{k}+2 \text{ - доказано}$$
+    \end{enumerate}
+
+    
+\end{enumerate}
+\end{document}
